@@ -1,1 +1,1 @@
-This My Project URL : https://spotifyhoney.netlify.app
+This My Project URL : https://spotify-honey.netlify.app
