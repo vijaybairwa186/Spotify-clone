@@ -31,17 +31,37 @@ nav ul {
 nav a {
   text-decoration: none;
   color: inherit;
+  transition: color 0.3s ease, transform 0.2s ease;
 }
 
 nav ul li {
   padding: 0 12px;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  /* Added transition for the li background itself */
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
 }
 
+/* Updated: Hover state for nav list items */
 nav ul li:hover {
-  background-color: white;
-  color: black;
+  background-color: rgba(255, 255, 255, 0.1); /* Subtle white background */
+  color: #1ed760; /* Spotify Green */
   cursor: pointer;
+  transform: translateY(-2px); /* Slight lift on hover */
+}
+
+/* Active state for navigation links with animation */
+nav ul li .active-nav {
+  color: #1ed760; /* Spotify Green */
+  font-weight: bold;
+  transform: scale(1.1); /* Subtle scale effect when active */
+  /* Remove background on active, as the li:hover might interfere visually */
+  background-color: transparent;
+}
+
+nav ul li .active-nav:hover {
+  /* Keep active color and transform when hovering over the active link */
+  background-color: transparent;
+  color: #1ed760;
+  transform: scale(1.1);
 }
 
 .brand {
@@ -88,13 +108,24 @@ nav ul li:hover {
   z-index: 1;
 }
 
-.songList {
-  flex: 1 1 60%;
-  background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(4px);
+.content-section {
+  flex: 1 1 100%;
   border-radius: 12px;
-  padding: 20px;
+  padding: 0px;
   z-index: 2;
+  display: none;
+}
+
+.content-section.active-section {
+    display: block;
+}
+
+#homeSection .songList {
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(4px);
+    border-radius: 12px;
+    padding: 20px;
+    width: 100%;
 }
 
 .songList h1 {
@@ -144,7 +175,7 @@ nav ul li:hover {
   color: white;
 }
 .songItem.active .timeStamp span {
-  color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .songItem img {
@@ -278,23 +309,120 @@ nav ul li:hover {
   color: #1ed760;
 }
 
+.section-content {
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(6px);
+  border-radius: 12px;
+  padding: 30px;
+  color: white;
+  text-align: center;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.section-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    font-family: "Ubuntu", sans-serif;
+    text-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+.section-content p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    max-width: 600px;
+    margin-bottom: 20px;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 30px;
+  padding: 10px 20px;
+  width: 80%;
+  max-width: 500px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.search-bar input {
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 5px 10px;
+  font-size: 1rem;
+  color: #333;
+}
+
+.search-bar input::placeholder {
+  color: #888;
+}
+
+.search-bar i {
+  color: #555;
+  font-size: 1.2rem;
+  margin-left: 10px;
+}
+
+.create-playlist-btn {
+  background-color: #1ed760;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 12px 25px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 10px rgba(30, 215, 96, 0.4);
+}
+
+.create-playlist-btn:hover {
+  background-color: #1aa34a;
+  transform: translateY(-2px);
+}
+
 @media screen and (max-width: 768px) {
   .container {
     flex-direction: column;
     padding: 15px;
     width: 95%;
-    min-height: auto;
     padding-bottom: 120px;
   }
 
-  .songList {
-    flex: 1 1 100%;
+  #homeSection .songList {
     padding: 15px;
     margin-bottom: 20px;
   }
 
   .container::after {
     display: none;
+  }
+
+  nav ul {
+    height: auto;
+    padding: 10px 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  nav ul li {
+      padding: 0 8px;
+  }
+
+  .brand {
+    font-size: 1.1rem;
+    margin-right: 20px;
+    flex-basis: 100%;
+    justify-content: center;
+    margin-bottom: 10px;
   }
 
   .songItem {
@@ -355,6 +483,21 @@ nav ul li:hover {
     height: 24px;
     width: 24px;
   }
+
+  .section-content {
+      padding: 20px;
+      gap: 15px;
+      min-height: 300px;
+  }
+  .section-content h2 {
+      font-size: 2rem;
+  }
+  .section-content p {
+      font-size: 1rem;
+  }
+  .search-bar {
+      width: 90%;
+  }
 }
 
 @media screen and (max-width: 420px) {
@@ -371,13 +514,13 @@ nav ul li:hover {
   }
 
   .brand {
-    display: flex;
     flex-direction: row;
     align-items: center;
     width: 100%;
     justify-content: flex-start;
     font-size: 1.1rem;
     margin-bottom: 5px;
+    margin-right: 0;
   }
 
   .brand img {
@@ -463,5 +606,20 @@ nav ul li:hover {
   .songInfo img {
     height: 20px;
     width: 20px;
+  }
+
+  .section-content {
+      padding: 15px;
+      min-height: 250px;
+  }
+  .section-content h2 {
+      font-size: 1.8rem;
+  }
+  .section-content p {
+      font-size: 0.9rem;
+  }
+  .create-playlist-btn {
+      font-size: 1rem;
+      padding: 10px 20px;
   }
 }
