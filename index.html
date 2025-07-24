@@ -1,112 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spotify - Your Favourite Music</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      integrity="sha512-/…=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Spotify - Your Favourite Music</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    integrity="sha512-/…==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
+  <body>
+    <nav>
+      <ul>
+        <li class="brand">
+          <img src="logo.png" alt="Spotify logo" />
+          Spotify
+        </li>
+        <li><a href="#" id="navHome" class="active-nav">Home</a></li>
+        <li><a href="#" id="navSearch">Search</a></li>
+        <li><a href="#" id="navLibrary">Your Library</a></li>
+      </ul>
+    </nav>
 
-<body>
-  <nav>
-    <ul>
-      <li class="brand">
-        <img src="logo.png" alt="Spotify logo" />
-        Spotify
-      </li>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">Search</a></li>
-      <li><a href="#">Your Library</a></li>
-    </ul>
-  </nav>
+    <div class="container">
+      <div id="homeSection" class="content-section active-section">
+        <div class="songList">
+          <h1>Your Favourite Music</h1>
+          <div class="songItemContainer">
+            <div class="songItem" id="songItem-0">
+              <img src="covers/Blue Eyes.jpg" alt="Blue Eyes Cover" />
+              <span class="songName">Blue Eyes</span>
+              <span class="songlistplay"
+                ><span class="timeStamp"><span></span></span
+                ><i id="0" class="fas songItemPlay fa-play-circle"></i
+              ></span>
+            </div>
+            <div class="songItem" id="songItem-1">
+              <img src="covers/Chaar Botal Vodka.jpg" alt="Chaar Botal Vodka Cover" />
+              <span class="songName">Chaar Botal Vodka</span>
+              <span class="songlistplay"
+                ><span class="timeStamp"><span></span></span
+                ><i id="1" class="fas songItemPlay fa-play-circle"></i
+              ></span>
+            </div>
+            <div class="songItem" id="songItem-2">
+              <img src="covers/Dheere Dheere Se Meri Zindagi.jpg" alt="Dheere Dheere Se Meri Zindagi Cover" />
+              <span class="songName">Dheere Dheere Se Meri Zindagi</span>
+              <span class="songlistplay"
+                ><span class="timeStamp"><span></span></span
+                ><i id="2" class="fas songItemPlay fa-play-circle"></i
+              ></span>
+            </div>
+            <div class="songItem" id="songItem-3">
+              <img src="covers/LOVE DOSE Full.jpg" alt="LOVE DOSE Cover" />
+              <span class="songName">LOVE DOSE</span>
+              <span class="songlistplay"
+                ><span class="timeStamp"><span></span></span
+                ><i id="3" class="fas songItemPlay fa-play-circle"></i
+              ></span>
+            </div>
+            <div class="songItem" id="songItem-4">
+              <img src="covers/HIGH HEELS TE NACHCHE.jpg" alt="HIGH HEELS TE NACHCHE Cover" />
+              <span class="songName">HIGH HEELS TE NACHCHE</span>
+              <span class="songlistplay"
+                ><span class="timeStamp"><span></span></span
+                ><i id="4" class="fas songItemPlay fa-play-circle"></i
+              ></span>
+            </div>
+            <div class="songItem" id="songItem-5">
+              <img src="covers/LAAL PARI.jpg" alt="LAAL PARI Cover" />
+              <span class="songName">LAAL PARI</span>
+              <span class="songlistplay"
+                ><span class="timeStamp"><span></span></span
+                ><i id="5" class="fas songItemPlay fa-play-circle"></i
+              ></span>
+            </div>
+            <div class="songItem" id="songItem-6">
+              <img src="covers/Lungi Dance Chennai.jpg" alt="Lungi Dance Chennai Cover" />
+              <span class="songName">Lungi Dance Chennai</span>
+              <span class="songlistplay"
+                ><span class="timeStamp"><span></span></span
+                ><i id="6" class="fas songItemPlay fa-play-circle"></i
+              ></span>
+            </div>
+            <div class="songItem" id="songItem-7">
+              <img src="covers/MANIAC.jpg" alt="MANIAC Cover" />
+              <span class="songName">MANIAC</span>
+              <span class="songlistplay"
+                ><span class="timeStamp"><span></span></span
+                ><i id="7" class="fas songItemPlay fa-play-circle"></i
+              ></span>
+            </div>
+            <div class="songItem" id="songItem-8">
+              <img src="covers/MILLIONAIRE SONG.jpg" alt="MILLIONAIRE SONG Cover" />
+              <span class="songName">MILLIONAIRE SONG</span>
+              <span class="songlistplay"
+                ><span class="timeStamp"><span></span></span
+                ><i id="8" class="fas songItemPlay fa-play-circle"></i
+              ></span>
+            </div>
+            <div class="songItem" id="songItem-9">
+              <img src="covers/Desi Kalakaar.jpg" alt="DESI KALAKAAR Cover" />
+              <span class="songName">DESI KALAKAAR</span>
+              <span class="songlistplay"
+                ><span class="timeStamp"><span></span></span
+                ><i id="9" class="fas songItemPlay fa-play-circle"></i
+              ></span>
+            </div>
+          </div>
+        </div>
+      </div>
 
-  <div class="container">
-    <div class="songList">
-      <h1>Your Favourite Music</h1>
-      <div class="songItemContainer">
-        <div class="songItem" id="songItem-0">
-          <img src="covers/Blue Eyes.jpg" alt="Blue Eyes Cover" />
-          <span class="songName">Blue Eyes</span>
-          <span class="songlistplay"><span class="timeStamp"><span></span></span><i id="0"
-              class="fas songItemPlay fa-play-circle"></i></span>
+      <div id="searchSection" class="content-section">
+        <div class="section-content">
+          <h2>Search for Music</h2>
+          <div class="search-bar">
+            <input type="text" placeholder="Artists, songs, or podcasts" />
+            <i class="fas fa-search"></i>
+          </div>
+          <p>Find your next favorite song!</p>
         </div>
-        <div class="songItem" id="songItem-1">
-          <img src="covers/Chaar Botal Vodka.jpg" alt="Chaar Botal Vodka Cover" />
-          <span class="songName">Chaar Botal Vodka</span>
-          <span class="songlistplay"><span class="timeStamp"><span></span></span><i id="1"
-              class="fas songItemPlay fa-play-circle"></i></span>
-        </div>
-        <div class="songItem" id="songItem-2">
-          <img src="covers/Dheere Dheere Se Meri Zindagi.jpg" alt="Dheere Dheere Se Meri Zindagi Cover" />
-          <span class="songName">Dheere Dheere Se Meri Zindagi</span>
-          <span class="songlistplay"><span class="timeStamp"><span></span></span><i id="2"
-              class="fas songItemPlay fa-play-circle"></i></span>
-        </div>
-        <div class="songItem" id="songItem-3">
-          <img src="covers/LOVE DOSE Full.jpg" alt="LOVE DOSE Cover" />
-          <span class="songName">LOVE DOSE</span>
-          <span class="songlistplay"><span class="timeStamp"><span></span></span><i id="3"
-              class="fas songItemPlay fa-play-circle"></i></span>
-        </div>
-        <div class="songItem" id="songItem-4">
-          <img src="covers/HIGH HEELS TE NACHCHE.jpg" alt="HIGH HEELS TE NACHCHE Cover" />
-          <span class="songName">HIGH HEELS TE NACHCHE</span>
-          <span class="songlistplay"><span class="timeStamp"><span></span></span><i id="4"
-              class="fas songItemPlay fa-play-circle"></i></span>
-        </div>
-        <div class="songItem" id="songItem-5">
-          <img src="covers/LAAL PARI.jpg" alt="LAAL PARI Cover" />
-          <span class="songName">LAAL PARI</span>
-          <span class="songlistplay"><span class="timeStamp"><span></span></span><i id="5"
-              class="fas songItemPlay fa-play-circle"></i></span>
-        </div>
-        <div class="songItem" id="songItem-6">
-          <img src="covers/Lungi Dance Chennai.jpg" alt="Lungi Dance Chennai Cover" />
-          <span class="songName">Lungi Dance Chennai</span>
-          <span class="songlistplay"><span class="timeStamp"><span></span></span><i id="6"
-              class="fas songItemPlay fa-play-circle"></i></span>
-        </div>
-        <div class="songItem" id="songItem-7">
-          <img src="covers/MANIAC.jpg" alt="MANIAC Cover" />
-          <span class="songName">MANIAC</span>
-          <span class="songlistplay"><span class="timeStamp"><span></span></span><i id="7"
-              class="fas songItemPlay fa-play-circle"></i></span>
-        </div>
-        <div class="songItem" id="songItem-8">
-          <img src="covers/MILLIONAIRE SONG.jpg" alt="MILLIONAIRE SONG Cover" />
-          <span class="songName">MILLIONAIRE SONG</span>
-          <span class="songlistplay"><span class="timeStamp"><span></span></span><i id="8"
-              class="fas songItemPlay fa-play-circle"></i></span>
-        </div>
-        <div class="songItem" id="songItem-9">
-          <img src="covers/Desi Kalakaar.jpg" alt="DESI KALAKAAR Cover" />
-          <span class="songName">DESI KALAKAAR</span>
-          <span class="songlistplay"><span class="timeStamp"><span></span></span><i id="9"
-              class="fas songItemPlay fa-play-circle"></i></span>
+      </div>
+
+      <div id="librarySection" class="content-section">
+        <div class="section-content">
+          <h2>Your Library</h2>
+          <p>Create your first playlist! It's easy, we'll help you.</p>
+          <button class="create-playlist-btn">Create your first playlist</button>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="songBanner"></div>
+    <div class="songBanner"></div>
 
-  <div class="bottom">
-    <input type="range" class="volumeSlider" min="0" max="100" value="0" id="myProgressBar" />
-    <div class="icons">
-      <i class="fas fa-3x fa-step-backward" id="previous"></i>
-      <i class="far fa-3x fa-play-circle" id="masterPlay"></i>
-      <i class="fas fa-3x fa-step-forward" id="next"></i>
+    <div class="bottom">
+      <input
+        type="range"
+        class="volumeSlider"
+        min="0"
+        max="100"
+        value="0"
+        id="myProgressBar"
+      />
+      <div class="icons">
+        <i class="fas fa-3x fa-step-backward" id="previous"></i>
+        <i class="far fa-3x fa-play-circle" id="masterPlay"></i>
+        <i class="fas fa-3x fa-step-forward" id="next"></i>
+      </div>
+      <div class="songInfo">
+        <img src="playing.gif" width="100" alt="Playing animation" id="gif" />
+        <span id="masterSongName"></span>
+      </div>
     </div>
-    <div class="songInfo">
-      <img src="playing.gif" width="100" alt="Playing animation" id="gif" />
-      <span id="masterSongName"></span>
-    </div>
-  </div>
 
-  <script src="script.js"></script>
-</body>
-
+    <script src="script.js"></script>
+  </body>
 </html>
