@@ -10,6 +10,7 @@
 body {
   background-color: rgb(247, 246, 246);
   font-family: "Varela Round", sans-serif;
+  overflow-x: hidden;
 }
 
 nav {
@@ -34,6 +35,7 @@ nav a {
 
 nav ul li {
   padding: 0 12px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 nav ul li:hover {
@@ -47,6 +49,7 @@ nav ul li:hover {
   align-items: center;
   font-weight: bold;
   font-size: 1.2rem;
+  flex-shrink: 0;
 }
 
 .brand img {
@@ -58,7 +61,6 @@ nav ul li:hover {
 
 .container {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   min-height: 72vh;
   margin: 23px auto;
@@ -75,13 +77,39 @@ nav ul li:hover {
   padding-bottom: 150px;
 }
 
-.songListSection {
+.container::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 40%;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.4), transparent);
+  z-index: 1;
+}
+
+.songList {
   flex: 1 1 60%;
   background-color: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(4px);
   border-radius: 12px;
   padding: 20px;
   z-index: 2;
+}
+
+.songList h1 {
+  font-size: 2rem;
+  color: rgb(247, 241, 241);
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  background-color: rgba(21, 21, 21, 0.6);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.songItemContainer {
+  margin-top: 20px;
 }
 
 .songItem {
@@ -96,11 +124,27 @@ nav ul li:hover {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   padding: 0 20px;
   transition: transform 0.3s ease, background-color 0.3s ease;
+  cursor: pointer;
 }
 
 .songItem:hover {
   transform: scale(1.02);
   background-color: #f0f0f0;
+}
+
+.songItem.active {
+  background-color: #1ed760;
+  color: white;
+  transform: scale(1.01);
+  box-shadow: 0 4px 10px rgba(30, 215, 96, 0.4);
+}
+
+.songItem.active .songName,
+.songItem.active .timeStamp {
+  color: white;
+}
+.songItem.active .timeStamp span {
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .songItem img {
@@ -122,6 +166,7 @@ nav ul li:hover {
 .songDetails h4 {
   font-size: 16px;
   font-weight: bold;
+  margin-bottom: 2px;
 }
 
 .songDetails p {
@@ -134,6 +179,18 @@ nav ul li:hover {
   align-items: center;
   gap: 12px;
   font-weight: bold;
+}
+
+.songlistplay i {
+  cursor: pointer;
+}
+
+.timeStamp {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #423131;
 }
 
 .songInfo {
@@ -150,8 +207,12 @@ nav ul li:hover {
   align-items: center;
   gap: 12px;
   font-family: "Varela Round", sans-serif;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
   z-index: 3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 40px);
 }
 
 .songInfo img {
@@ -162,13 +223,14 @@ nav ul li:hover {
   transition: opacity 0.3s ease;
 }
 
+.songInfo.active img,
+.songInfo:hover img {
+  opacity: 1;
+}
+
 .songInfo:hover {
   background-color: rgba(255, 255, 255, 0.8);
   color: black;
-}
-
-.songInfo:hover img {
-  opacity: 0.8;
 }
 
 .bottom {
@@ -176,23 +238,25 @@ nav ul li:hover {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 130px;
+  height: 100px;
   background-color: black;
   color: white;
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  padding: 10px;
+  padding: 10px 0;
   z-index: 1000;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
 }
 
 #myProgressBar {
   width: 80vw;
   height: 8px;
   margin-bottom: 10px;
-  accent-color: #1d3cb9;
+  accent-color: #1ed760;
   cursor: pointer;
+  border-radius: 5px;
 }
 
 .icons {
@@ -200,43 +264,18 @@ nav ul li:hover {
   align-items: center;
   justify-content: center;
   gap: 40px;
-  margin-top: 14px;
+  margin-top: 5px;
 }
 
 .icons i {
   cursor: pointer;
-  font-size: 24px;
+  font-size: 28px;
+  transition: transform 0.2s ease;
 }
 
-.timeStamp {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  font-size: 14px;
-  color: #423131;
-}
-
-.timeStamp span {
-  font-weight: bold;
-}
-
-.timeStamp i {
-  cursor: pointer;
-}
-
-.songItemContainer {
-  margin-top: 40px;
-}
-
-.container::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  top: 0;
-  height: 100%;
-  width: 40%;
-  background: linear-gradient(to left, rgba(0, 0, 0, 0.4), transparent);
-  z-index: 1;
+.icons i:hover {
+  transform: scale(1.1);
+  color: #1ed760;
 }
 
 @media screen and (max-width: 768px) {
@@ -244,17 +283,25 @@ nav ul li:hover {
     flex-direction: column;
     padding: 15px;
     width: 95%;
+    min-height: auto;
+    padding-bottom: 120px;
   }
 
-  .songListSection {
+  .songList {
     flex: 1 1 100%;
-    padding: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+
+  .container::after {
+    display: none;
   }
 
   .songItem {
     flex-direction: row;
     height: auto;
     padding: 12px;
+    margin: 8px 0;
   }
 
   .songItem img {
@@ -267,74 +314,154 @@ nav ul li:hover {
     font-size: 15px;
   }
 
+  .songDetails p {
+    font-size: 13px;
+  }
+
+  .songlistplay {
+    gap: 8px;
+  }
+
+  .timeStamp {
+    font-size: 13px;
+  }
+
   .bottom {
-    height: auto;
-    padding: 15px 5px;
+    height: 90px;
+    padding: 10px 0;
   }
 
   #myProgressBar {
     width: 90vw;
   }
+
+  .icons {
+    gap: 25px;
+  }
+
+  .icons i {
+    font-size: 26px;
+  }
+
+  .songInfo {
+    font-size: 16px;
+    left: 15px;
+    bottom: 95px;
+    padding: 8px 12px;
+    max-width: calc(100% - 30px);
+  }
+
+  .songInfo img {
+    height: 24px;
+    width: 24px;
+  }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 420px) {
   nav ul {
     flex-direction: column;
     height: auto;
     padding: 10px;
-    gap: 10px;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  nav ul li {
+    padding: 5px 12px;
+  }
+
+  .brand {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    justify-content: flex-start;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
   }
 
   .brand img {
-    height: 40px;
-    width: 40px;
+    height: 35px;
+    width: 35px;
+  }
+
+  .container {
+    padding: 10px;
+    width: 98%;
+  }
+
+  .songList h1 {
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+    padding: 8px;
   }
 
   .songItem {
     flex-direction: column;
     align-items: flex-start;
-    padding: 15px;
+    padding: 10px;
+    height: auto;
   }
 
   .songItem img {
     margin-right: 0;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
+    width: 45px;
+    height: 45px;
   }
 
   .songDetails {
     margin-left: 0;
+    text-align: left;
+    width: 100%;
   }
 
-  .songInfo {
-    flex-direction: column;
+  .songDetails h4 {
     font-size: 14px;
-    left: 10px;
-    bottom: 70px;
-    gap: 6px;
-    padding: 8px;
   }
 
-  .icons {
-    gap: 20px;
-    font-size: 20px;
+  .songDetails p {
+    font-size: 12px;
+  }
+
+  .songlistplay {
+    width: 100%;
+    justify-content: flex-end;
+    margin-top: 8px;
   }
 
   .timeStamp {
     font-size: 12px;
   }
 
-  #myProgressBar {
-    width: 90vw;
+  .bottom {
+    height: 80px;
+    padding: 8px 0;
   }
-}
 
-.songList h1 {
-  font-size: 2rem;
-  color: rgb(247, 241, 241);
-  font-weight: bold;
-  margin-bottom: 20px;
-  text-align: center;
-  background-color: rgba(21, 21, 21, 0.6);
-  padding: 10px;
-  border-radius: 10px;
+  #myProgressBar {
+    width: 95vw;
+    margin-bottom: 8px;
+  }
+
+  .icons {
+    gap: 20px;
+  }
+
+  .icons i {
+    font-size: 24px;
+  }
+
+  .songInfo {
+    font-size: 14px;
+    left: 10px;
+    bottom: 85px;
+    padding: 6px 10px;
+    gap: 8px;
+  }
+
+  .songInfo img {
+    height: 20px;
+    width: 20px;
+  }
 }
