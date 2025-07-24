@@ -1,5 +1,3 @@
-console.log("Welcome to Spotify - A Beautiful Music Experience!");
-
 let songIndex = 0;
 let audioElement = new Audio();
 let masterPlay = document.getElementById("masterPlay");
@@ -8,6 +6,15 @@ let gif = document.getElementById("gif");
 let masterSongName = document.getElementById("masterSongName");
 let songItems = Array.from(document.getElementsByClassName("songItem"));
 let songItemPlays = Array.from(document.getElementsByClassName("songItemPlay"));
+
+const navHome = document.getElementById("navHome");
+const navSearch = document.getElementById("navSearch");
+const navLibrary = document.getElementById("navLibrary");
+const homeSection = document.getElementById("homeSection");
+const searchSection = document.getElementById("searchSection");
+const librarySection = document.getElementById("librarySection");
+const contentSections = document.querySelectorAll(".content-section");
+const navLinks = document.querySelectorAll("nav ul li a");
 
 let songs = [
   {
@@ -85,7 +92,7 @@ let songs = [
 songItems.forEach((element, i) => {
   element.getElementsByTagName("img")[0].src = songs[i].coverPath;
   element.getElementsByClassName("songName")[0].innerText = songs[i].songName;
-  element.querySelector(".timeStamp span").innerText = songs[i].duration;
+  element.querySelector('.timeStamp span').innerText = songs[i].duration;
 });
 
 const makeAllPlays = () => {
@@ -99,42 +106,32 @@ const makeAllPlays = () => {
 };
 
 const playSong = () => {
-  console.log("Attempting to play songIndex:", songIndex);
-  console.log("Song details:", songs[songIndex]);
   audioElement.pause();
   audioElement.currentTime = 0;
 
   audioElement.src = songs[songIndex].filePath;
 
-  audioElement.onerror = () => {
-    console.error(
-      "Error loading audio for:",
-      songs[songIndex].songName,
-      "Path:",
-      songs[songIndex].filePath
-    );
-  };
-
-  audioElement
-    .play()
-    .then(() => {
-      console.log("Song playback initiated successfully for:", songs[songIndex].songName);
-      masterPlay.classList.remove("fa-play-circle");
-      masterPlay.classList.add("fa-pause-circle");
-      gif.style.opacity = 1;
-      updateSongUI();
-    })
-    .catch((error) => {
-      console.warn(
-        "Autoplay was prevented or error during play for:",
-        songs[songIndex].songName,
-        error
-      );
+  audioElement.onerror = (e) => {
+      console.error("Audio loading error:", songs[songIndex].songName, e);
+      alert(`Could not load song: ${songs[songIndex].songName}. Please check file path.`);
       masterPlay.classList.remove("fa-pause-circle");
       masterPlay.classList.add("fa-play-circle");
       gif.style.opacity = 0;
       makeAllPlays();
-    });
+  };
+
+  audioElement.play().then(() => {
+    masterPlay.classList.remove("fa-play-circle");
+    masterPlay.classList.add("fa-pause-circle");
+    gif.style.opacity = 1;
+    updateSongUI();
+  }).catch(error => {
+    console.warn("Autoplay prevented or play error:", error);
+    masterPlay.classList.remove("fa-pause-circle");
+    masterPlay.classList.add("fa-play-circle");
+    gif.style.opacity = 0;
+    makeAllPlays();
+  });
 };
 
 const updateSongUI = () => {
@@ -143,6 +140,18 @@ const updateSongUI = () => {
   songItemPlays[songIndex].classList.remove("fa-play-circle");
   songItemPlays[songIndex].classList.add("fa-pause-circle");
   masterSongName.innerText = songs[songIndex].songName;
+};
+
+const showSection = (sectionId) => {
+    contentSections.forEach(section => {
+        section.classList.remove('active-section');
+    });
+    document.getElementById(sectionId).classList.add('active-section');
+
+    navLinks.forEach(link => {
+        link.classList.remove('active-nav');
+    });
+    document.getElementById(`nav${sectionId.replace('Section', '')}`).classList.add('active-nav');
 };
 
 masterPlay.addEventListener("click", () => {
@@ -174,33 +183,29 @@ myProgressBar.addEventListener("change", () => {
 
 songItems.forEach((element, i) => {
   element.addEventListener("click", () => {
-    if (songIndex === i && !audioElement.paused && audioElement.currentTime > 0) {
-      audioElement.pause();
-      masterPlay.classList.remove("fa-pause-circle");
-      masterPlay.classList.add("fa-play-circle");
-      gif.style.opacity = 0;
-      makeAllPlays();
+    if (songIndex === i && (!audioElement.paused && audioElement.currentTime > 0)) {
+        audioElement.pause();
+        masterPlay.classList.remove("fa-pause-circle");
+        masterPlay.classList.add("fa-play-circle");
+        gif.style.opacity = 0;
+        makeAllPlays();
     } else {
-      songIndex = i;
-      playSong();
+        songIndex = i;
+        playSong();
     }
   });
 
   element.querySelector(".songlistplay i").addEventListener("click", (e) => {
     e.stopPropagation();
-    if (
-      songIndex === parseInt(e.target.id) &&
-      !audioElement.paused &&
-      audioElement.currentTime > 0
-    ) {
-      audioElement.pause();
-      masterPlay.classList.remove("fa-pause-circle");
-      masterPlay.classList.add("fa-play-circle");
-      gif.style.opacity = 0;
-      makeAllPlays();
+    if (songIndex === parseInt(e.target.id) && (!audioElement.paused && audioElement.currentTime > 0)) {
+        audioElement.pause();
+        masterPlay.classList.remove("fa-pause-circle");
+        masterPlay.classList.add("fa-play-circle");
+        gif.style.opacity = 0;
+        makeAllPlays();
     } else {
-      songIndex = parseInt(e.target.id);
-      playSong();
+        songIndex = parseInt(e.target.id);
+        playSong();
     }
   });
 });
@@ -223,15 +228,30 @@ document.getElementById("previous").addEventListener("click", () => {
   playSong();
 });
 
-audioElement.addEventListener("ended", () => {
-  console.log("Current song ended. Moving to next.");
-  if (songIndex >= songs.length - 1) {
-    songIndex = 0;
-  } else {
-    songIndex += 1;
-  }
-  playSong();
+audioElement.addEventListener('ended', () => {
+    if (songIndex >= songs.length - 1) {
+        songIndex = 0;
+    } else {
+        songIndex += 1;
+    }
+    playSong();
+});
+
+navHome.addEventListener('click', (e) => {
+    e.preventDefault();
+    showSection('homeSection');
+});
+
+navSearch.addEventListener('click', (e) => {
+    e.preventDefault();
+    showSection('searchSection');
+});
+
+navLibrary.addEventListener('click', (e) => {
+    e.preventDefault();
+    showSection('librarySection');
 });
 
 masterSongName.innerText = songs[songIndex].songName;
 gif.style.opacity = 0;
+showSection('homeSection');
